@@ -1,0 +1,28 @@
+// Binary Tree Right Side View
+
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        ArrayList<Integer> list1=new ArrayList<Integer>();
+        if(root==null){
+            return list1;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            int size=queue.size();
+            for(int i=1;i<=size;i++){
+                TreeNode temp=queue.poll();
+                if(i==size){
+                    list1.add(temp.val);
+                }
+                if(temp.left!=null){
+                    queue.add(temp.left);
+                }
+                if(temp.right!=null){
+                    queue.add(temp.right);
+                }
+            }
+        }
+        return list1;
+    }
+}
