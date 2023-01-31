@@ -1,0 +1,14 @@
+// Construct Binary Search Tree from Preorder Traversal
+
+class Solution {
+    public TreeNode bstFromPreorder(int[] A) {
+        return bstFromPreorder(A,Integer.MAX_VALUE,new int[]{0});
+    }
+    public TreeNode bstFromPreorder(int[] A,int bound,int[] arr){
+        if(arr[0]==A.length || A[arr[0]]>bound) return null;
+        TreeNode node = new TreeNode(A[arr[0]++]);
+        node.left = bstFromPreorder(A,node.val,arr);
+        node.right = bstFromPreorder(A,bound,arr);
+        return node;
+    }
+}
