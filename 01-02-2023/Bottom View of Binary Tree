@@ -1,0 +1,42 @@
+// Bottom View of Binary Tree
+
+
+class Solution
+{
+    static ArrayList<Integer> bottomView(Node root)
+    {
+        class Pair{
+            Node node;
+            int hd;
+            Pair(Node node,int hd){
+                this.node=node;
+                this.hd=hd;
+            }
+        }
+        ArrayList<Integer> list = new ArrayList<>(); 
+        if(root == null) return list;
+        Map<Integer, Integer> map = new TreeMap<>();
+        Queue<Pair> queue = new LinkedList<Pair>();
+        queue.add(new Pair(root, 0)); 
+        while(!queue.isEmpty()) {
+            Pair it = queue.remove();
+            int hd = it.hd; 
+            Node temp = it.node; 
+            if(map.get(hd) == null || map.get(hd)!=null) map.put(hd, temp.data); 
+            if(temp.left != null) {
+                
+                queue.add(new Pair(temp.left, hd - 1)); 
+            }
+            if(temp.right != null) {
+                
+                queue.add(new Pair(temp.right, hd + 1)); 
+            }
+        }
+    
+        for (Map.Entry<Integer,Integer> entry : map.entrySet()) {
+            list.add(entry.getValue()); 
+        }
+        return list; 
+        
+    }
+}
